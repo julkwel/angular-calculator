@@ -1,13 +1,13 @@
 <div class="calculator card">
 
-    <input type="text" class="calculator-screen z-depth-1" value="" disabled />
+    <input type="text"  class="calculator-screen z-depth-1" value={{lastValue}} disabled />
 
     <div class="calculator-keys">
 
-      <button type="button" class="operator btn btn-info" value="+">+</button>
-      <button type="button" class="operator btn btn-info" value="-">-</button>
-      <button type="button" class="operator btn btn-info" value="*">&times;</button>
-      <button type="button" class="operator btn btn-info" value="/">&divide;</button>
+      <button type="button" [disabled]="willDisable" (click)="updateSign($event)" class="operator btn btn-info" value="+">+</button>
+      <button type="button" [disabled]="willDisable" (click)="updateSign($event)" class="operator btn btn-info" value="-">-</button>
+      <button type="button" [disabled]="willDisable" (click)="updateSign($event)" class="operator btn btn-info" value="*">&times;</button>
+      <button type="button" [disabled]="willDisable" (click)="updateSign($event)" class="operator btn btn-info" value="/">&divide;</button>
 
       <button type="button" (click)="getValue($event)" value="7" class="btn btn-light waves-effect">7</button>
       <button type="button" (click)="getValue($event)" value="8" class="btn btn-light waves-effect">8</button>
@@ -28,7 +28,7 @@
       <button type="button" (click)="getValue($event)" class="decimal function btn btn-secondary" value=".">.</button>
       <button type="button" (click)="reset()" class="all-clear function btn btn-danger btn-sm" value="all-clear">AC</button>
 
-      <button type="button" class="equal-sign operator btn btn-success" value="=">=</button>
+      <button type="button" (click)="calculate()" class="equal-sign operator btn btn-success" value="=">=</button>
 
     </div>
   </div>
