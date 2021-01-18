@@ -14,6 +14,7 @@ export class CalculatorComponent implements OnInit {
   secondValue: number = 0;
   waitSecondValue: boolean = false;
   willDisable: boolean = false;
+  disableEqual: boolean = false;
 
   constructor() { }
 
@@ -26,7 +27,7 @@ export class CalculatorComponent implements OnInit {
   updateSign(evt: any) {
     this.setHasSign(true);
     this.setSign(evt.target.value);
-    this.setPrevValue(parseInt(this.lastValue) ?? 0);
+    this.setPrevValue(parseFloat(this.lastValue) ?? 0);
     this.setIsWaitSecondValue(true);
   }
 
@@ -34,6 +35,7 @@ export class CalculatorComponent implements OnInit {
     console.log(this.lastValue, this.prevValue, this.sign);
     let value = eval(this.prevValue + this.sign + this.lastValue);
     this.lastValue = value;
+    this.setDisableEqual(true);
   }
 
   updateValue(lastValue: any) {
@@ -72,8 +74,13 @@ export class CalculatorComponent implements OnInit {
     this.waitSecondValue = state;
   }
 
+  setDisableEqual(state: boolean){
+    this.disableEqual = state;
+  }
+
   reset() {
     this.lastValue = 0;
     this.setWillDisable(false);
+    this.setDisableEqual(false);
   }
 }
