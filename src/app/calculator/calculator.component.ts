@@ -15,10 +15,13 @@ export class CalculatorComponent implements OnInit {
   waitSecondValue: boolean = false;
   willDisable: boolean = false;
   disableEqual: boolean = false;
+  clockValue: string = '';
 
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.updateDate();
+  }
 
   getValue(evt: any) {
     this.updateValue(evt.target.value)
@@ -74,7 +77,7 @@ export class CalculatorComponent implements OnInit {
     this.waitSecondValue = state;
   }
 
-  setDisableEqual(state: boolean){
+  setDisableEqual(state: boolean) {
     this.disableEqual = state;
   }
 
@@ -82,5 +85,21 @@ export class CalculatorComponent implements OnInit {
     this.lastValue = 0;
     this.setWillDisable(false);
     this.setDisableEqual(false);
+  }
+
+  updateDate() {
+    let that = this;
+    setInterval(function () {
+      let date = (new Date());
+      let hour = date.getHours();
+      let min = date.getMinutes();
+      let sec = date.getSeconds();
+
+      that.clockValue = that.readableValue(hour) + ' : ' + that.readableValue(min) + ' : ' + that.readableValue(sec) + ' / ' + date.getFullYear();
+    }, 1000);
+  }
+
+  readableValue(value: number) {
+    return value > 10 ? value : '0' + value;
   }
 }
